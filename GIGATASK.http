@@ -1,0 +1,6 @@
+@GIGATASK_HostAddress = http://localhost:5291
+
+GET {{GIGATASK_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
