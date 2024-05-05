@@ -10,55 +10,35 @@ namespace GIGATASK.Controllers
     [ApiController]
     public class ProductController : ControllerBase
     {
-        private readonly ApplicContext _context;
-        //public ProductController(ApplicContext context)
-        //{
-        //    _context = context;
-        //}
+        private readonly ProductService _productService;
+        
+        public ProductController(ProductService productService)
+        {
+            _productService = context;
+        }
 
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetAllProduct()
         {
-            var products = await _context.Products.ToListAsync();
-            return Ok(products);
+            return Ok(await _productService.GetProducts());
         }
 
-        [HttpPost("AddProduct")]
-        public async Task<ActionResult<List<Product>>> AddProduct(Product allProduct)
+        [HttpPost]
+        public async Task<ActionResult<List<Product>>> AddProduct(Product product)
         {
-            _context.Products.Add(allProduct);
-            await _context.SaveChangesAsync();
-            return Ok(await _context.Products.ToListAsync());
+             return Ok(await _productService.AddProduct(product));
         }
 
         [HttpPut("{id}")]
-        public async Task<ActionResult<List<Product>>> UpdateProduct(Product allProduct)
+        public async Task<ActionResult<List<Product>>> UpdateProduct(Product product)
         {
-            var dbProduct = await _context.Products.FindAsync(allProduct.Id);
-            if(dbProduct == null)
-            {
-                return BadRequest("Product not found");
-            }
-            allProduct.Id = dbProduct.Id;
-            allProduct.Name = dbProduct.Name;
-            allProduct.Description = dbProduct.Description;
-
-            _context.Products.Update(allProduct);
-            await _context.SaveChangesAsync();
-            return Ok(await _context.Products.ToListAsync());
+              return Ok(await _productService.UpdateProduct(product));
         }
 
-        [HttpDelete("DeleteProduct")]
-        public async Task<ActionResult<List<Product>>> DeleteProduct(Product allProduct)
+        [HttpDelete]
+        public async Task<ActionResult<List<Product>>> DeleteProduct(int id)
         {
-            var dbProduct = await _context.Products.FindAsync(allProduct.Id);
-            if(dbProduct == null)
-            {
-                return BadRequest("Not found");
-            }
-            _context.Products.Remove(allProduct);
-            await _context.SaveChangesAsync();
-            return Ok(await _context.Products.ToListAsync());
+              return Ok(await _productService.DeleteProduct(id));
         }
 
     }
