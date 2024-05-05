@@ -1,5 +1,6 @@
 ﻿using GIGATASK.Data;
 using GIGATASK.Models;
+using GIGATASK.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,7 +15,7 @@ namespace GIGATASK.Controllers
         
         public ProductController(ProductService productService)
         {
-            _productService = context;
+            _productService = productService;
         }
 
         [HttpGet("{id}")]

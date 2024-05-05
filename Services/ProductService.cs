@@ -1,5 +1,7 @@
 ﻿using GIGATASK.Data;
+using GIGATASK.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace GIGATASK.Services
 {
@@ -19,7 +21,8 @@ namespace GIGATASK.Services
 
         public async Task<Product> GetProduct(int id)
         {
-            Product product = await _context.FirstOrDefaultAsync(p => p.Id == id);
+
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
             // try catch 
 
@@ -44,11 +47,11 @@ namespace GIGATASK.Services
         
         public async Task<int> DeleteProduct(int id)
         {
-               Product product = await _context.FirstOrDefaultAsync(p => p.Id == id);
+            Product product = await _context.Products.FirstOrDefaultAsync(p => p.Id == id);
 
 
-// try catch
-               _context.Remove(product);
+            // try catch
+            _context.Remove(product);
             await _context.SaveChangesAsync();
 
             return id;
