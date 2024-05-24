@@ -18,28 +18,34 @@ namespace GIGATASK.Controllers
             _productService = productService;
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("Get all products")]
         public async Task<ActionResult<Product>> GetAllProduct()
         {
-            return Ok(await _productService.GetProducts());
+            return Ok(await _productService.GetAllProducts());
         }
 
-        [HttpPost]
+        [HttpGet("Get product by id")]
+        public async Task<IActionResult> GetProduct(int id)
+        {
+            return Ok(await _productService.GetProductById(id));
+        }
+
+        [HttpPost("Add product")]
         public async Task<ActionResult<List<Product>>> AddProduct(Product product)
         {
-             return Ok(await _productService.AddProduct(product));
+             return Ok(await _productService.CreateProduct(product));
         }
 
-        [HttpPut("{id}")]
-        public async Task<ActionResult<List<Product>>> UpdateProduct(Product product)
+        [HttpPut("Update product by id")]
+        public async Task<ActionResult<List<Product>>> UpdateProduct(Product product, int id)
         {
-              return Ok(await _productService.UpdateProduct(product));
+              return Ok(await _productService.UpdateProduct(product, id));
         }
 
-        [HttpDelete]
-        public async Task<ActionResult<List<Product>>> DeleteProduct(int id)
+        [HttpDelete("Delete product by id")]
+        public async Task<ActionResult<List<Product>>> DeleteProduct(int id, Product product)
         {
-              return Ok(await _productService.DeleteProduct(id));
+              return Ok(await _productService.DeleteProduct(id, product));
         }
 
     }
