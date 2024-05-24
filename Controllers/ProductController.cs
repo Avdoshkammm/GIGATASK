@@ -1,9 +1,6 @@
-﻿using GIGATASK.Data;
-using GIGATASK.Models;
+﻿using GIGATASK.Models;
 using GIGATASK.Services;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace GIGATASK.Controllers
 {
@@ -47,6 +44,5 @@ namespace GIGATASK.Controllers
         {
               return Ok(await _productService.DeleteProduct(id, product));
         }
-
     }
 }

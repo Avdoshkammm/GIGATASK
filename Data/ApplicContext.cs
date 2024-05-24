@@ -11,6 +11,5 @@ namespace GIGATASK.Data
         }
 
         public DbSet<Product> Products { get; set; }
-
     }
 }

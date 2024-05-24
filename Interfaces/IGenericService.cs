@@ -1,7 +1,4 @@
-﻿using GIGATASK.Models;
-using Microsoft.AspNetCore.Mvc;
-
-namespace GIGATASK.Interfaces
+﻿namespace GIGATASK.Interfaces
 {
     public interface IGenericService<T>
     {
@@ -10,6 +7,5 @@ namespace GIGATASK.Interfaces
         Task<T> CreateProduct(T entity);
         Task<T> UpdateProduct(T entity, int id);
         Task<T> DeleteProduct(int id, T entity);
-
     }
 }
